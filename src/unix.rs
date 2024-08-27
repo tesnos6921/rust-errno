@@ -97,5 +97,6 @@ extern "C" {
     )]
     #[cfg_attr(target_os = "aix", link_name = "_Errno")]
     #[cfg_attr(target_os = "nto", link_name = "__get_errno_ptr")]
+    #[cfg_attr(target_os = "switch", link_name = "__nnmusl_ErrnoLocation")]
     fn errno_location() -> *mut c_int;
 }
