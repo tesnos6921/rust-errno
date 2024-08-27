@@ -28,6 +28,9 @@ libc = { version = "0.2", default-features = false }
 [target.'cfg(target_os="hermit")'.dependencies]
 libc = { version = "0.2", default-features = false }
 
+[target.'cfg(target_os="switch")'.dependencies]
+libc-nnsdk = { version = "0.3", default-features = false }
+
 [features]
 default = ["std"]
 std = ["libc/std"]
