@@ -28,21 +28,7 @@ pub fn with_description<F, T>(err: Errno, callback: F) -> T
 where
     F: FnOnce(Result<&str, Errno>) -> T,
 {
-    let mut buf = [0u8; 1024];
-    let c_str = unsafe {
-        let rc = strerror(err.0, buf.as_mut_ptr() as *mut _, buf.len() as size_t);
-        if rc != 0 {
-            // Handle negative return codes for compatibility with glibc < 2.13
-            let fm_err = match rc < 0 {
-                true => errno(),
-                false => Errno(rc),
-            };
-            return callback(Err(fm_err));
-        }
-        let c_str_len = strlen(buf.as_ptr() as *const _);
-        &buf[..c_str_len]
-    };
-    callback(Ok(from_utf8_lossy(c_str)))
+    callback(Ok(""))
 }
 
 pub const STRERROR_NAME: &str = "strerror";
