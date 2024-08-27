@@ -19,7 +19,7 @@
 
 #![cfg_attr(not(feature = "std"), no_std)]
 
-#[cfg_attr(unix, path = "unix.rs")]
+#[cfg_attr(any(unix, target_os = "switch"), path = "unix.rs")]
 #[cfg_attr(windows, path = "windows.rs")]
 #[cfg_attr(target_os = "wasi", path = "wasi.rs")]
 #[cfg_attr(target_os = "hermit", path = "hermit.rs")]
